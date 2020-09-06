@@ -7,6 +7,7 @@ Esse projeto foi desenvolvido baseado no [desafio front end](https://github.com/
 ## Tecnologias utilizadas
 
 -   [Vue](https://vuejs.org/)
+-   [Vuex](https://vuex.vuejs.org/)
 -   [Axios](https://github.com/axios/axios)
 
 ## Usando o APP

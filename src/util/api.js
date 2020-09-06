@@ -46,6 +46,7 @@ API.get_movies = async () => {
             const extra_info = await get_extra_info(movie.id);
 
             movies.push({
+                id: movie.id,
                 title: movie.title,
                 poster: IMG_URL + movie.poster_path,
                 year: movie.release_date.slice(0, 4),
