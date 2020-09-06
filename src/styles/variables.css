@@ -1,0 +1,6 @@
+:root {
+    --red: #ff1c1c;
+    --light-red: #ff5656;
+    --dark: rgb(70, 70, 70);
+    --red-gradient: linear-gradient(to right, var(--light-red), var(--red));
+}

@@ -1,18 +1,6 @@
 <template>
     <div class="container">
-        <img src="../assets/logo-viva-decora.png" alt="vica decora logo" />
-
-        <nav class="routes">
-            <router-link to="/" class="r-btn">
-                <button>Filmes não curados</button>
-            </router-link>
-            <router-link to="/likes" class="r-btn">
-                <button>Filmes curtidos</button>
-            </router-link>
-            <router-link to="/dislikes" class="r-btn">
-                <button>Filmes não curtidos</button>
-            </router-link>
-        </nav>
+        <routes-header />
 
         <div class="card"></div>
 
@@ -33,64 +21,26 @@
 </template>
 
 <script>
+import RoutesHeader from "@/components/RoutesHeader";
+
 export default {
-    name: "HomePage"
+    name: "HomePage",
+
+    components: {
+        RoutesHeader
+    }
 };
 </script>
 
 <style scoped>
 .container {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, var(--light-red), var(--red));
-    text-align: center;
-    padding: 2vw 0;
-}
-
-button {
-    text-transform: uppercase;
-    border: none;
-}
-
-.routes {
-    margin: 2vw 0 4vw;
-}
-
-.routes button {
-    position: relative;
-    color: white;
-    background-color: transparent;
-    font-weight: 600;
-    opacity: 0.65;
-}
-
-.routes button::before {
-    content: "";
-    position: absolute;
-    bottom: -7px;
-    left: 0;
-    width: 0;
-    height: 5px;
-    background-color: white;
-    transition: 0.3s;
-}
-
-.routes button:hover {
-    opacity: 1;
-}
-
-.routes button:hover::before {
-    width: 100%;
-}
-
-.routes .r-btn:nth-of-type(2) {
-    margin: 0 75px;
+    background: var(--red-gradient);
 }
 
 .card {
     max-width: 700px;
     height: 460px;
-    background-color: #fff;
+    background-color: white;
     margin: 3.5vw auto;
     border-radius: 5px;
 }
@@ -102,7 +52,7 @@ button {
 .actions button {
     height: 75px;
     padding: 0 30px;
-    color: rgb(70, 70, 70);
+    color: var(--dark);
     background-color: white;
     border-radius: 50px;
     font-size: 0.97rem;

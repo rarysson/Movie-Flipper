@@ -1,0 +1,18 @@
+.container {
+    background-color: whitesmoke;
+}
+
+.r-header {
+    background: var(--red-gradient);
+}
+
+.content-container {
+    max-width: 1055px;
+    margin: 2vw auto 0;
+    text-align: left;
+}
+
+h1 {
+    text-transform: uppercase;
+    color: var(--dark);
+}
