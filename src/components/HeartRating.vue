@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .heart {
     position: relative;
-    width: 130px;
+    width: 115px;
     height: 20px;
     margin-bottom: 5px;
 }
@@ -41,7 +41,7 @@ export default {
 
 .heart-border {
     background-image: url("../assets/favorite_.png");
-    background-repeat: space;
+    background-size: contain;
 }
 
 .heart-color-width {
@@ -53,9 +53,9 @@ export default {
 }
 
 .heart span.heart-color {
-    width: 130px;
+    width: 115px;
     height: 20px;
     background-image: url("../assets/favorite.png");
-    background-repeat: space;
+    background-size: contain;
 }
 </style>

@@ -19,7 +19,7 @@ npm install
 npm run serve
 ```
 
-Dentro do pasta criada crie um arquivo chamado `.env.local`. Dentro desse arquivo coloque os seguintes valores (sem os parênteses):
+Dentro da pasta criada crie um arquivo chamado `.env.local`. Dentro desse arquivo coloque os seguintes valores (sem os parênteses):
 
 ```
 VUE_APP_TOKEN=(SUA CHAVE DE ACESSO 'v4 auth' DA API DO The Movie Database)

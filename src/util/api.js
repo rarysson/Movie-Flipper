@@ -39,7 +39,7 @@ API.get_movies = async () => {
     try {
         const response = await API.get("list/1");
         const data = response.data.results;
-        const IMG_URL = "https://image.tmdb.org/t/p/original";
+        const IMG_URL = "https://image.tmdb.org/t/p/w500";
         const movies = [];
 
         for (let movie of data) {
