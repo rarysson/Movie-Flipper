@@ -12,6 +12,8 @@ Esse projeto foi desenvolvido baseado no [desafio front end](https://github.com/
 
 ## Usando o APP
 
+Para usar online acesse o link: https://movie-flipper.herokuapp.com/
+
 Para usar localmente, clone o repositório, vá na pasta criada e execute os comandos:
 
 ```
