@@ -39,10 +39,10 @@ API.get_movies = async () => {
     try {
         const response = await API.get("list/1");
         const data = response.data.results;
-        const IMG_URL = "https://image.tmdb.org/t/p/w500";
+        const IMG_URL = "https://image.tmdb.org/t/p/original";
         const movies = [];
 
-        data.forEach(async movie => {
+        for (let movie of data) {
             const extra_info = await get_extra_info(movie.id);
 
             movies.push({
@@ -56,7 +56,7 @@ API.get_movies = async () => {
                 overview: movie.overview,
                 runtime: extra_info.runtime
             });
-        });
+        }
 
         return movies;
     } catch (error) {

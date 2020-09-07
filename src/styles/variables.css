@@ -3,4 +3,9 @@
     --light-red: #ff5656;
     --dark: rgb(70, 70, 70);
     --red-gradient: linear-gradient(to right, var(--light-red), var(--red));
+    --red-alpha-gradient: linear-gradient(to right, #ff5656f2, #ff1c1ccc);
+    --dark-alpha-gradient: linear-gradient(
+        transparent 60%,
+        rgba(30, 30, 30, 0.75)
+    );
 }

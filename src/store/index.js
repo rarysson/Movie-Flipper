@@ -21,11 +21,11 @@ export default new Vuex.Store({
             commit("set_movies", movies);
         },
 
-        like({ commit }, movie) {
+        like_movie({ commit }, movie) {
             commit("like_movie", movie);
         },
 
-        dislike({ commit }, movie) {
+        dislike_movie({ commit }, movie) {
             commit("dislike_movie", movie);
         }
     },
