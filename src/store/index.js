@@ -22,11 +22,17 @@ export default new Vuex.Store({
         },
 
         like_movie({ commit }, movie) {
+            commit("remove_movie", movie);
             commit("like_movie", movie);
         },
 
         dislike_movie({ commit }, movie) {
+            commit("remove_movie", movie);
             commit("dislike_movie", movie);
+        },
+
+        skip_movie({ commit }, movie) {
+            commit("remove_movie", movie);
         }
     },
 
@@ -36,15 +42,16 @@ export default new Vuex.Store({
         },
 
         like_movie(state, movie) {
-            const index = state.movies.findIndex(m => m.id === movie.id);
-            state.movies.splice(index, 1);
             state.likes.unshift(movie);
         },
 
         dislike_movie(state, movie) {
+            state.dislikes.unshift(movie);
+        },
+
+        remove_movie(state, movie) {
             const index = state.movies.findIndex(m => m.id === movie.id);
             state.movies.splice(index, 1);
-            state.dislikes.unshift(movie);
         }
     }
 });

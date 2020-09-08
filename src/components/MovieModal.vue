@@ -169,6 +169,7 @@ img {
 @media (max-width: 450px) {
     .modal {
         padding: 0 20px 20px;
+        height: 500px;
     }
 
     button {
@@ -177,6 +178,10 @@ img {
         top: -5px;
         right: -5px;
         font-size: 1.5rem;
+    }
+
+    .rating {
+        margin: 10px 0 15px;
     }
 
     .overview {

@@ -58,57 +58,44 @@ export default {
     methods: {
         ...mapGetters(["movies", "likes", "dislikes"]),
 
-        ...mapActions(["set_movies", "like_movie", "dislike_movie"]),
+        ...mapActions([
+            "set_movies",
+            "like_movie",
+            "dislike_movie",
+            "skip_movie"
+        ]),
 
         like() {
             if (this.max_index > 0 && !this.on_animation) {
-                this.$refs.movie.$el.classList.add("like");
-                this.on_animation = true;
-
-                setTimeout(() => {
-                    this.like_movie(this.current_movie);
-                    this.max_index--;
-                    this.current_index %= this.max_index;
-                    this.$refs.movie.$el.classList.remove("like");
-                    this.change_movie();
-                    this.on_animation = false;
-                }, 330);
+                this.change_movie(this.like_movie, "like");
             }
         },
 
         skip() {
             if (this.max_index > 0 && !this.on_animation) {
-                this.$refs.movie.$el.classList.add("skip");
-                this.current_index = (this.current_index + 1) % this.max_index;
-                this.on_animation = true;
-
-                setTimeout(() => {
-                    this.$refs.movie.$el.classList.remove("skip");
-                    this.change_movie();
-                    this.on_animation = false;
-                }, 330);
+                this.change_movie(this.skip_movie, "skip");
             }
         },
 
         dislike() {
             if (this.max_index > 0 && !this.on_animation) {
-                this.$refs.movie.$el.classList.add("dislike");
-                this.on_animation = true;
-
-                setTimeout(() => {
-                    this.dislike_movie(this.current_movie);
-                    this.max_index--;
-                    this.current_index %= this.max_index;
-                    this.$refs.movie.$el.classList.remove("dislike");
-                    this.change_movie();
-                    this.on_animation = false;
-                }, 330);
+                this.change_movie(this.dislike_movie, "dislike");
             }
         },
 
-        change_movie() {
-            this.current_movie = this.movies()[this.current_index];
-            this.change_background_img();
+        change_movie(action, action_type) {
+            this.$refs.movie.$el.classList.add(action_type);
+            this.on_animation = true;
+
+            setTimeout(() => {
+                action(this.current_movie);
+                this.max_index--;
+                this.current_index %= this.max_index;
+                this.$refs.movie.$el.classList.remove(action_type);
+                this.current_movie = this.movies()[this.current_index];
+                this.change_background_img();
+                this.on_animation = false;
+            }, 330);
         },
 
         change_background_img() {
