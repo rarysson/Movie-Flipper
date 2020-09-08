@@ -3,7 +3,7 @@
         <routes-header />
 
         <div class="movie-container">
-            <movie-card :movie="current_movie" />
+            <movie-card :movie="current_movie" ref="movie" />
         </div>
 
         <btn-group @like="like" @skip="skip" @dislike="dislike" />
@@ -30,7 +30,8 @@ export default {
         return {
             current_movie: null,
             current_index: 0,
-            max_index: 0
+            max_index: 0,
+            on_animation: false
         };
     },
 
@@ -60,27 +61,48 @@ export default {
         ...mapActions(["set_movies", "like_movie", "dislike_movie"]),
 
         like() {
-            if (this.max_index > 0) {
-                this.like_movie(this.current_movie);
-                this.max_index--;
-                this.current_index %= this.max_index;
-                this.change_movie();
+            if (this.max_index > 0 && !this.on_animation) {
+                this.$refs.movie.$el.classList.add("like");
+                this.on_animation = true;
+
+                setTimeout(() => {
+                    this.like_movie(this.current_movie);
+                    this.max_index--;
+                    this.current_index %= this.max_index;
+                    this.$refs.movie.$el.classList.remove("like");
+                    this.change_movie();
+                    this.on_animation = false;
+                }, 330);
             }
         },
 
         skip() {
-            if (this.max_index > 0) {
+            if (this.max_index > 0 && !this.on_animation) {
+                this.$refs.movie.$el.classList.add("skip");
                 this.current_index = (this.current_index + 1) % this.max_index;
-                this.change_movie();
+                this.on_animation = true;
+
+                setTimeout(() => {
+                    this.$refs.movie.$el.classList.remove("skip");
+                    this.change_movie();
+                    this.on_animation = false;
+                }, 330);
             }
         },
 
         dislike() {
-            if (this.max_index > 0) {
-                this.dislike_movie(this.current_movie);
-                this.max_index--;
-                this.current_index %= this.max_index;
-                this.change_movie();
+            if (this.max_index > 0 && !this.on_animation) {
+                this.$refs.movie.$el.classList.add("dislike");
+                this.on_animation = true;
+
+                setTimeout(() => {
+                    this.dislike_movie(this.current_movie);
+                    this.max_index--;
+                    this.current_index %= this.max_index;
+                    this.$refs.movie.$el.classList.remove("dislike");
+                    this.change_movie();
+                    this.on_animation = false;
+                }, 330);
             }
         },
 
@@ -114,5 +136,39 @@ export default {
 .movie-container {
     width: 100%;
     padding: 0 3vw;
+    overflow: hidden;
+}
+
+.like {
+    animation: like 0.35s;
+}
+
+.dislike {
+    animation: dislike 0.35s;
+}
+
+.skip {
+    animation: skip 0.35s;
+}
+
+@keyframes like {
+    100% {
+        opacity: 0;
+        transform: translateX(150%);
+    }
+}
+
+@keyframes dislike {
+    100% {
+        opacity: 0;
+        transform: translateX(-150%);
+    }
+}
+
+@keyframes skip {
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
 }
 </style>
