@@ -1,6 +1,6 @@
 <template>
     <div class="card" ref="card">
-        <div v-if="movie !== null" class="card-content">
+        <div v-if="movie" class="card-content">
             <div class="info-container">
                 <p class="title">{{ movie.title }}</p>
 
@@ -23,18 +23,21 @@
             <div class="overview-container">
                 <p>{{ movie.overview }}</p>
 
-                <button>Ver Sinopse</button>
+                <button @click="open_modal = true">Ver Sinopse</button>
             </div>
         </div>
 
         <div v-else class="card-content">
             <p class="title">Nenhum filme a ser mostrado</p>
         </div>
+
+        <movie-modal v-model="open_modal" :movie="movie" />
     </div>
 </template>
 
 <script>
 import HeartRating from "./HeartRating";
+import MovieModal from "./MovieModal";
 
 export default {
     name: "MovieCard",
@@ -42,7 +45,14 @@ export default {
     props: ["movie"],
 
     components: {
-        HeartRating
+        HeartRating,
+        MovieModal
+    },
+
+    data() {
+        return {
+            open_modal: false
+        };
     },
 
     watch: {
@@ -133,6 +143,10 @@ export default {
     text-transform: none;
     text-decoration: underline;
     font-weight: bold;
+}
+
+.overview-container button:hover {
+    color: var(--red);
 }
 
 @media (max-width: 550px) {

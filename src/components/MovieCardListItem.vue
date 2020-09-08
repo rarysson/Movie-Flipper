@@ -21,14 +21,17 @@
             <div class="overview-container">
                 <p>{{ movie.overview }}</p>
 
-                <button>Ver Sinopse</button>
+                <button @click="open_modal = true">Ver Sinopse</button>
             </div>
         </div>
+
+        <movie-modal v-model="open_modal" :movie="movie" />
     </div>
 </template>
 
 <script>
 import HeartRating from "./HeartRating";
+import MovieModal from "./MovieModal";
 
 export default {
     name: "MovieCardListItem",
@@ -36,7 +39,14 @@ export default {
     props: ["movie"],
 
     components: {
-        HeartRating
+        HeartRating,
+        MovieModal
+    },
+
+    data() {
+        return {
+            open_modal: false
+        };
     }
 };
 </script>
@@ -105,6 +115,10 @@ export default {
     text-transform: none;
     text-decoration: underline;
     font-weight: bold;
+}
+
+.overview-container button:hover {
+    color: var(--red);
 }
 
 @media (max-width: 700px) {
