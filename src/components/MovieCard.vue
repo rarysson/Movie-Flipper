@@ -79,7 +79,7 @@ export default {
     position: relative;
     max-width: 700px;
     height: 460px;
-    margin: 3.5vw auto;
+    margin: 0.5vw auto 3.5vw;
     border-radius: 5px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -150,6 +150,10 @@ export default {
 }
 
 @media (max-width: 550px) {
+    .card {
+        margin: 40px auto 20px;
+    }
+
     .extra-info {
         display: none;
     }

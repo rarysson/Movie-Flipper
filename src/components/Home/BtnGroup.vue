@@ -23,6 +23,7 @@ export default {
 <style scoped>
 .actions {
     display: inline-flex;
+    align-items: center;
 }
 
 .actions button {
@@ -49,6 +50,8 @@ export default {
 }
 
 .actions img {
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
     margin-top: 12px;
 }
@@ -63,5 +66,37 @@ export default {
 
 .actions button:last-of-type {
     color: var(--light-red);
+}
+
+@media (max-width: 700px) {
+    .actions button:nth-of-type(odd) {
+        width: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .actions button {
+        padding: 0;
+    }
+
+    .actions img {
+        margin: 0;
+    }
+
+    span {
+        display: none;
+    }
+
+    .actions button:nth-of-type(odd) {
+        width: 75px;
+        display: unset;
+        border-radius: 50%;
+    }
+
+    .actions button:nth-of-type(2) {
+        height: 60px;
+        margin: 0 20px;
+        padding: 0 20px;
+    }
 }
 </style>

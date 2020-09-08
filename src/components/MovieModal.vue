@@ -76,7 +76,7 @@ export default {
     display: grid;
     place-items: center;
     background-color: rgba(75, 75, 75, 0.75);
-    z-index: 999;
+    z-index: 99;
 }
 
 .modal {

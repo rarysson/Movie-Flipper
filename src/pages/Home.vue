@@ -2,7 +2,9 @@
     <div class="container" ref="container">
         <routes-header />
 
-        <movie-card :movie="current_movie" />
+        <div class="movie-container">
+            <movie-card :movie="current_movie" />
+        </div>
 
         <btn-group @like="like" @skip="skip" @dislike="dislike" />
     </div>
@@ -106,6 +108,11 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: center;
-    padding: 0 3vw 2vw;
+    background-position-x: center;
+}
+
+.movie-container {
+    width: 100%;
+    padding: 0 3vw;
 }
 </style>

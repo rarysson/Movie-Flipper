@@ -1,5 +1,7 @@
 <template>
     <header>
+        <sidebar-menu class="sidebar-menu" />
+
         <img src="../assets/logo-viva-decora.png" alt="vica decora logo" />
 
         <nav class="routes" ref="routes">
@@ -17,8 +19,14 @@
 </template>
 
 <script>
+import SidebarMenu from "./SidebarMenu";
+
 export default {
     name: "RoutesHeader",
+
+    components: {
+        SidebarMenu
+    },
 
     mounted() {
         this.$refs.routes.children[
@@ -34,11 +42,16 @@ function get_current_path_index(path) {
 
 <style scoped>
 header {
-    padding-top: 2vw;
+    padding: 3vw 0;
+    position: relative;
+}
+
+.sidebar-menu {
+    display: none;
 }
 
 .routes {
-    padding: 2vw 0 3vw;
+    padding: 1.5vw 0 10px;
 }
 
 .routes button {
@@ -78,5 +91,19 @@ button.active-route-effect {
 
 button.active-route-effect::before {
     width: 100%;
+}
+
+@media (max-width: 620px) {
+    header {
+        padding-top: 20px;
+    }
+
+    .routes {
+        display: none;
+    }
+
+    .sidebar-menu {
+        display: flex;
+    }
 }
 </style>
