@@ -181,11 +181,15 @@ img {
     }
 
     .rating {
-        margin: 10px 0 15px;
+        margin: 10px 0;
+    }
+
+    .heart-modal {
+        margin-bottom: 5px;
     }
 
     .overview {
-        height: 120px;
+        height: 110px;
     }
 }
 </style>
