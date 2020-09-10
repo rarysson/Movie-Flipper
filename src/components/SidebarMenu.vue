@@ -28,9 +28,6 @@
 </template>
 
 <script>
-let container = document.querySelector(".container");
-let app = document.getElementById("app");
-
 export default {
     name: "SidebarMenu",
 
@@ -40,28 +37,28 @@ export default {
         };
     },
 
-    mounted() {
-        container = document.querySelector(".container");
-        app = document.getElementById("app");
-    },
-
     destroyed() {
         this.hide_sidebard_menu();
     },
 
     methods: {
         show_sidebar_menu() {
+            const app = document.getElementById("app");
+            const container = document.querySelector(".container");
+
             app.style.overflow = "hidden";
             app.style.backgroundColor = "#444";
             container.style.transform = "translateX(250px)";
         },
 
         hide_sidebard_menu() {
-            app.style.overflow = "auto";
+            const app = document.getElementById("app");
+            const container = document.querySelector(".container");
+
             container.style.transform = "translateX(0)";
 
             // Delay para definir valor após terminar animação do container
-            setTimeout(() => (app.style.backgroundColor = "unset"), 300);
+            setTimeout(() => (app.style = ""), 300);
         }
     }
 };
