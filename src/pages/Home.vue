@@ -3,7 +3,11 @@
         <routes-header />
 
         <div class="movie-container">
-            <movie-card :movie="current_movie" ref="movie" />
+            <movie-card
+                :movie="current_movie"
+                :loading-effect="on_loading_movies"
+                ref="movie"
+            />
         </div>
 
         <btn-group @like="like" @skip="skip" @dislike="dislike" />
@@ -31,7 +35,8 @@ export default {
             current_movie: null,
             current_index: 0,
             max_index: 0,
-            on_animation: false
+            on_animation: false,
+            on_loading_movies: false
         };
     },
 
@@ -42,8 +47,10 @@ export default {
             this.dislikes().length === 0
         ) {
             try {
+                this.on_loading_movies = true;
                 const movies = await API.get_movies();
 
+                this.on_loading_movies = false;
                 this.set_movies(movies);
             } catch (error) {
                 console.log(error);

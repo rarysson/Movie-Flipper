@@ -27,8 +27,12 @@
             </div>
         </div>
 
-        <div v-else class="card-content">
+        <div v-else-if="!loadingEffect" class="card-content">
             <p class="title">Nenhum filme a ser mostrado</p>
+        </div>
+
+        <div v-else class="card-content loading">
+            <p class="title">Carregando filmes</p>
         </div>
 
         <movie-modal v-model="open_modal" :movie="movie" />
@@ -42,7 +46,7 @@ import MovieModal from "./MovieModal";
 export default {
     name: "MovieCard",
 
-    props: ["movie"],
+    props: ["movie", "loadingEffect"],
 
     components: {
         HeartRating,
@@ -215,6 +219,34 @@ export default {
     .card {
         max-width: 294px;
         height: 350px;
+    }
+}
+
+.loading {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+    );
+    animation: loading 1s infinite;
+}
+
+@keyframes loading {
+    100% {
+        transform: translateX(100%);
     }
 }
 </style>
