@@ -16,7 +16,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import API from "@/util/api";
 import RoutesHeader from "@/components/RoutesHeader";
 import BtnGroup from "@/components/Home/BtnGroup";
 import MovieCard from "@/components/MovieCard";
@@ -33,8 +32,7 @@ export default {
     data() {
         return {
             current_movie: null,
-            current_index: 0,
-            max_index: 0,
+            movies: 0,
             on_animation: false,
             on_loading_movies: false
         };
@@ -42,28 +40,26 @@ export default {
 
     async mounted() {
         if (
-            this.movies().length === 0 &&
+            this.movies_total() === 0 &&
             this.likes().length === 0 &&
             this.dislikes().length === 0
         ) {
             try {
                 this.on_loading_movies = true;
-                const movies = await API.get_movies();
-
+                await this.set_movies();
                 this.on_loading_movies = false;
-                this.set_movies(movies);
             } catch (error) {
                 console.log(error);
             }
         }
 
-        this.max_index = this.movies().length;
-        this.current_movie = this.movies()[this.current_index];
+        this.movies = this.movies_total();
+        this.current_movie = this.first_movie();
         this.change_background_img();
     },
 
     methods: {
-        ...mapGetters(["movies", "likes", "dislikes"]),
+        ...mapGetters(["first_movie", "movies_total", "likes", "dislikes"]),
 
         ...mapActions([
             "set_movies",
@@ -73,19 +69,19 @@ export default {
         ]),
 
         like() {
-            if (this.max_index > 0 && !this.on_animation) {
+            if (this.movies > 0 && !this.on_animation) {
                 this.change_movie(this.like_movie, "like");
             }
         },
 
         skip() {
-            if (this.max_index > 0 && !this.on_animation) {
+            if (this.movies > 0 && !this.on_animation) {
                 this.change_movie(this.skip_movie, "skip");
             }
         },
 
         dislike() {
-            if (this.max_index > 0 && !this.on_animation) {
+            if (this.movies > 0 && !this.on_animation) {
                 this.change_movie(this.dislike_movie, "dislike");
             }
         },
@@ -96,17 +92,16 @@ export default {
 
             setTimeout(() => {
                 action(this.current_movie);
-                this.max_index--;
-                this.current_index %= this.max_index;
                 this.$refs.movie.$el.classList.remove(action_type);
-                this.current_movie = this.movies()[this.current_index];
+                this.current_movie = this.first_movie();
                 this.change_background_img();
+                this.movies = this.movies_total();
                 this.on_animation = false;
             }, 330);
         },
 
         change_background_img() {
-            if (this.max_index > 0) {
+            if (this.movies > 1) {
                 this.$refs.container.style.backgroundImage = `var(--red-alpha-gradient),
                     url("${this.get_poster()}")`;
             } else {

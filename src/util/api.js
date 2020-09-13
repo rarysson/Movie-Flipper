@@ -35,10 +35,11 @@ async function get_extra_info(movie_id) {
     }
 }
 
-API.get_movies = async () => {
+API.get_movies = async (page = 1) => {
     try {
-        const response = await API.get("list/1");
+        const response = await API.get(`list/1?page=${page}`);
         const data = response.data.results;
+        const total_pages = response.data.total_pages;
         const IMG_URL_sm = "https://image.tmdb.org/t/p/w154";
         const IMG_URL_md = "https://image.tmdb.org/t/p/w342";
         const IMG_URL_lg = "https://image.tmdb.org/t/p/w500";
@@ -64,7 +65,7 @@ API.get_movies = async () => {
             });
         }
 
-        return movies;
+        return [movies, total_pages];
     } catch (error) {
         throw error;
     }
