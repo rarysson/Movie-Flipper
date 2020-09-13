@@ -1,41 +1,31 @@
 <template>
     <transition name="modal">
-        <div v-if="open">
-            <div class="overlay">
-                <div class="modal">
-                    <button @click="open = false">
-                        <span>X</span>
-                    </button>
+        <div v-if="open" class="overlay">
+            <div class="modal">
+                <button @click="open = false">
+                    <span>X</span>
+                </button>
 
-                    <img
-                        :src="movie.poster_sm"
-                        alt=""
-                        width="115"
-                        height="140"
-                    />
+                <img :src="movie.poster_sm" alt="" width="115" height="140" />
 
-                    <p class="title">{{ movie.title }}</p>
+                <p class="title">{{ movie.title }}</p>
 
-                    <p class="extra-info">
-                        {{ movie.year }} •
-                        {{ movie.genres.reduce((acc, cv) => acc + "/" + cv) }}
-                        • {{ Math.floor(movie.runtime / 60) }}H
-                        {{ movie.runtime % 60 }}M
+                <p class="extra-info">
+                    {{ movie.year }} •
+                    {{ movie.genres.reduce((acc, cv) => acc + "/" + cv) }}
+                    • {{ Math.floor(movie.runtime / 60) }}H
+                    {{ movie.runtime % 60 }}M
+                </p>
+
+                <div class="rating">
+                    <heart-rating :value="movie.rating" class="heart-modal" />
+
+                    <p class="user-count">
+                        ({{ movie.rating_count }} avaliações)
                     </p>
-
-                    <div class="rating">
-                        <heart-rating
-                            :value="movie.rating"
-                            class="heart-modal"
-                        />
-
-                        <p class="user-count">
-                            ({{ movie.rating_count }} avaliações)
-                        </p>
-                    </div>
-
-                    <p class="overview">{{ movie.overview }}</p>
                 </div>
+
+                <p class="overview">{{ movie.overview }}</p>
             </div>
         </div>
     </transition>
@@ -82,6 +72,7 @@ export default {
     place-items: center;
     background-color: rgba(75, 75, 75, 0.75);
     z-index: 99;
+    transition: all 0.3s;
 }
 
 .modal {
@@ -92,6 +83,12 @@ export default {
     border-radius: 10px;
     margin: 0 15px;
     padding: 0 3.5% 3.5%;
+    transition: all 0.3s;
+}
+
+.modal-enter .modal,
+.modal-leave-active .modal {
+    transform: scale(0.1);
 }
 
 button {
@@ -109,16 +106,6 @@ button {
 
 button:hover {
     transform: scale(1.15) rotate(360deg);
-}
-
-.modal-enter-active,
-.modal-leave-active {
-    transition: all 0.3s;
-}
-
-.modal-enter,
-.modal-leave-to {
-    transform: scale(0.1);
 }
 
 img {
