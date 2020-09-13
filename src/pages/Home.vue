@@ -101,10 +101,24 @@ export default {
         change_background_img() {
             if (this.max_index > 0) {
                 this.$refs.container.style.backgroundImage = `var(--red-alpha-gradient),
-                    url("${this.current_movie.poster}")`;
+                    url("${this.get_poster()}")`;
             } else {
                 this.$refs.container.style.backgroundImage =
                     "var(--red-gradient)";
+            }
+        },
+
+        get_poster() {
+            const width = this.$refs.container.offsetWidth;
+
+            if (this.current_movie) {
+                if (width > 500) {
+                    return this.current_movie.poster_xl;
+                } else if (width > 350) {
+                    return this.current_movie.poster_lg;
+                } else {
+                    return this.current_movie.poster_md;
+                }
             }
         }
     }

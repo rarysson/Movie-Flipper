@@ -39,7 +39,10 @@ API.get_movies = async () => {
     try {
         const response = await API.get("list/1");
         const data = response.data.results;
-        const IMG_URL = "https://image.tmdb.org/t/p/w500";
+        const IMG_URL_sm = "https://image.tmdb.org/t/p/w154";
+        const IMG_URL_md = "https://image.tmdb.org/t/p/w342";
+        const IMG_URL_lg = "https://image.tmdb.org/t/p/w500";
+        const IMG_URL_xl = "https://image.tmdb.org/t/p/w780";
         const movies = [];
 
         for (let movie of data) {
@@ -48,7 +51,10 @@ API.get_movies = async () => {
             movies.push({
                 id: movie.id,
                 title: movie.title,
-                poster: IMG_URL + movie.poster_path,
+                poster_sm: IMG_URL_sm + movie.poster_path,
+                poster_md: IMG_URL_md + movie.poster_path,
+                poster_lg: IMG_URL_lg + movie.poster_path,
+                poster_xl: IMG_URL_xl + movie.poster_path,
                 year: movie.release_date.slice(0, 4),
                 genres: extra_info.genres,
                 rating: movie.vote_average,

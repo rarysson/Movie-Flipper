@@ -7,7 +7,12 @@
                         <span>X</span>
                     </button>
 
-                    <img :src="movie.poster" alt="" width="115" height="140" />
+                    <img
+                        :src="movie.poster_sm"
+                        alt=""
+                        width="115"
+                        height="140"
+                    />
 
                     <p class="title">{{ movie.title }}</p>
 

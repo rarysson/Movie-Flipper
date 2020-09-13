@@ -1,8 +1,9 @@
 <template>
     <div
         class="card"
+        ref="card"
         :style="{
-            backgroundImage: `var(--dark-alpha-gradient), url('${movie.poster}')`
+            backgroundImage: `var(--dark-alpha-gradient), url('${get_poster()}')`
         }"
     >
         <div class="card-content">
@@ -45,8 +46,21 @@ export default {
 
     data() {
         return {
-            open_modal: false
+            open_modal: false,
+            width: 0
         };
+    },
+
+    mounted() {
+        this.width = this.$refs.card.offsetWidth;
+    },
+
+    methods: {
+        get_poster() {
+            return this.width > 150
+                ? this.movie.poster_md
+                : this.movie.poster_sm;
+        }
     }
 };
 </script>

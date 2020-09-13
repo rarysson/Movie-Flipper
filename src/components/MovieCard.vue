@@ -51,8 +51,13 @@ export default {
 
     data() {
         return {
-            open_modal: false
+            open_modal: false,
+            width: 0
         };
+    },
+
+    mounted() {
+        this.width = this.$refs.card.offsetWidth;
     },
 
     watch: {
@@ -65,9 +70,21 @@ export default {
         change_background_img() {
             if (this.movie) {
                 this.$refs.card.style.backgroundImage = `var(--dark-alpha-gradient),
-                    url("${this.movie.poster}")`;
+                    url("${this.get_poster()}")`;
             } else {
                 this.$refs.card.style.backgroundImage = `url("${require("@/assets/video-camera-vazio.png")}")`;
+            }
+        },
+
+        get_poster() {
+            if (this.movie) {
+                if (this.width > 500) {
+                    return this.movie.poster_xl;
+                } else if (this.width > 350) {
+                    return this.movie.poster_lg;
+                } else {
+                    return this.movie.poster_md;
+                }
             }
         }
     }
