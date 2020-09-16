@@ -234,19 +234,21 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
-    transform: translateX(-100%);
-    background: linear-gradient(
-        90deg,
+    background-image: linear-gradient(
+        to right,
         transparent,
-        rgba(255, 255, 255, 0.5),
+        rgba(230, 230, 230, 0.5),
         transparent
     );
+    background-size: 50%;
+    background-position-x: -200%;
+    background-repeat: no-repeat;
     animation: loading 1s infinite;
 }
 
 @keyframes loading {
     100% {
-        transform: translateX(100%);
+        background-position-x: 200%;
     }
 }
 </style>
